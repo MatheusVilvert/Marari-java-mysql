@@ -20,6 +20,8 @@ public class UsuarioService {
         String nomeResgistrado="";
         String nomeNovo = usuario.getNome();
 
+        Perfil  perfilPadrao = perfilRepository.findOne(2);
+        usuario.setPerfil(perfilPadrao);
         if (usuario.getId()!= null){
             Usuario usuRegistrado = usuarioRepository.findOne(usuario.getId());
             nomeResgistrado = usuRegistrado.getNome();

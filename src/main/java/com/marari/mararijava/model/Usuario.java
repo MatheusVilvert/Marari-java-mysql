@@ -8,8 +8,7 @@ import javax.persistence.*;
 @Data
 public class Usuario {
     @Id
-   // @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario")
-    @GeneratedValue//generator = "seq_usuario")
+    @GeneratedValue
     private Integer id;
     private String nome;
     private String email;
@@ -21,7 +20,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id,String nome, String email, String senha, Perfil perfil) {
+    public Usuario(Integer id, String nome, String email, String senha, Perfil perfil) {
         this.id = id;
         this.nome = nome;
         this.email = email;
