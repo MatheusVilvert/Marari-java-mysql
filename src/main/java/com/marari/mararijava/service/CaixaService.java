@@ -54,6 +54,8 @@ public class CaixaService {
 
     }
 
+    public List<Caixa> fluxoDeCaixa(String dataInicio, String dataFinal){return caixaRepository.fluxoDeCaixa(dataInicio,dataFinal);}
+
     public List<Caixa> buscarTodos(){return caixaRepository.findAll();}
 
     public void excluir(Caixa caixa){caixaRepository.delete(caixa);}

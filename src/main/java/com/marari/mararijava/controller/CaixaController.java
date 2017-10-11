@@ -3,6 +3,7 @@ package com.marari.mararijava.controller;
 import com.marari.mararijava.model.Caixa;
 import com.marari.mararijava.service.CaixaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,9 @@ public class CaixaController {
 
     @GetMapping("caixa/todos")
     public List<Caixa> buscarTodos(){return caixaService.buscarTodos();}
+
+    @GetMapping("caixa/fluxo")
+    public List<Caixa> fluxoDeCaixa(@Param("dataInicio")String dataInicio,@Param("dataFinal")String dataFinal){return caixaService.fluxoDeCaixa(dataInicio,dataFinal);}
 
     @DeleteMapping("caixa/{id}")
     public void excluir(@PathVariable("id")Integer id){
