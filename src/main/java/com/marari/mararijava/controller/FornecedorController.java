@@ -3,6 +3,7 @@ package com.marari.mararijava.controller;
 import com.marari.mararijava.model.Fornecedor;
 import com.marari.mararijava.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public class FornecedorController {
 
     @GetMapping("fornecedor/todos")
     public List<Fornecedor> buscarTodos(){return fornecedorService.buscarTodos();}
+
+    @GetMapping("fornecedor/parametro")
+    public List<Fornecedor> listaPorParametro(@Param("parametro")String parametro){return fornecedorService.listaPorParametro(parametro);}
 
     @DeleteMapping("fornecedor/{id}")
     public void excluir(@PathVariable("id")Integer id){

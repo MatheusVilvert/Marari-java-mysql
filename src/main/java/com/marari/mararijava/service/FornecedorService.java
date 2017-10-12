@@ -17,6 +17,8 @@ public class FornecedorService {
 
     public List<Fornecedor> buscarTodos(){return fornecedorRepository.findAll();}
 
+    public List<Fornecedor> listaPorParametro(String parametro){return fornecedorRepository.listaPorParametro('%'+parametro+'%');}
+
     public void excluir(Fornecedor fornecedor){fornecedorRepository.delete(fornecedor);}
 
     public void editar(Fornecedor fornecedor){

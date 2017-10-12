@@ -51,6 +51,10 @@ public class ProdutoService {
 
     public List<Produto> buscarTodos(){return produtoRepository.findAll();}
 
+    public List<Produto> listaDePrecos(String parametro){return produtoRepository.listaDePrecos('%'+parametro+'%');}
+
+    public List<Produto> posicaoEstoque(String parametro){return produtoRepository.posicaoEstoque('%'+parametro+'%');}
+
     public void excluir(Produto produto){produtoRepository.delete(produto);}
 
     public void editar(Produto produto){
