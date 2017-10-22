@@ -11,12 +11,11 @@ public class Pedido {
     @Id
     @GeneratedValue
     private Integer id;
-    @ManyToMany
-    @JoinColumn
-    private List<Produto> produtoList;
+    @OneToMany
+    private List<ItemPedido> itemPedidoList;
 
-    public Pedido(List<Produto> produtoList) {
-        this.produtoList = produtoList;
+    public Pedido(List<ItemPedido> itemPedidoList) {
+        this.itemPedidoList = itemPedidoList;
     }
 
     public Pedido() {
