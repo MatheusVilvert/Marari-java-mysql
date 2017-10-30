@@ -15,25 +15,25 @@ public class UsuarioController
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/usuarios/salvar")
+    @PostMapping("/usuario/salvar")
     public Usuario cadastrar(@RequestBody Usuario usuario){
 
         return usuarioService.salvar(usuario);
 
     }
 
-    @PutMapping("/usuarios/alterar")
+    @PutMapping("/usuario/alterar")
     public Usuario alterar(@RequestBody Usuario usuario){
         return usuarioService.salvar(usuario);
     }
 
-    @GetMapping("/usuarios/todos")
+    @GetMapping("/usuario/todos")
     public List<Usuario> buscarTodos(){return usuarioService.buscarTodos();}
 
-    @GetMapping("/usuarios/nome")
+    @GetMapping("/usuario/nome")
     public List<Usuario> buscarPorNome(@RequestParam("nome")String nome){return usuarioService.buscarPorNome(nome);}
 
-    @DeleteMapping("/usuarios/{id}")
+    @DeleteMapping("/usuario/{id}")
     public void excluir(@PathVariable("id")Integer id){
         Usuario usuario = new Usuario();
         usuario.setId(id);

@@ -3,9 +3,7 @@ package com.marari.mararijava.controller;
 import com.marari.mararijava.model.Perfil;
 import com.marari.mararijava.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +14,21 @@ public class PerfilController {
     @Autowired
     PerfilService perfilService;
 
-    @GetMapping("/usuarios/perfil")
+    @GetMapping("/perfil/todos")
     public List<Perfil> buscarTodos(){return perfilService.buscarTodos();}
+
+    @PostMapping("/perfil/salvar")
+    public Perfil salvar(@RequestBody Perfil perfil){return perfilService.salvar(perfil);}
+
+    @DeleteMapping("/perfil/{id}")
+    public void excluir(@PathVariable("id")Integer id){
+        Perfil perfil = new Perfil();
+        perfil.setId(id);
+        perfilService.excluir(perfil);
+    }
+
+    @PutMapping("/perfil/alterar")
+    public void alterar(@RequestBody Perfil perfil){
+        perfilService.editar(perfil);
+    }
 }

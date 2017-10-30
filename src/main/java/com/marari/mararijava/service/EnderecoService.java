@@ -13,4 +13,15 @@ public class EnderecoService {
     EnderecoRepository enderecoRepository;
 
     public List<Endereco> buscarTodos(){return enderecoRepository.findAll();}
+
+    public Endereco salvar(Endereco endereco){return enderecoRepository.save(endereco);}
+
+    public void excluir(Endereco endereco){enderecoRepository.delete(endereco);}
+
+    public void editar(Endereco endereco){
+        Endereco enderecoExistente = enderecoRepository.findOne(endereco.getId());
+        if (enderecoExistente != null){
+            enderecoRepository.save(endereco);
+        }
+    }
 }

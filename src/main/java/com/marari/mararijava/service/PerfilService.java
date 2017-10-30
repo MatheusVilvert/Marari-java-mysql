@@ -15,4 +15,15 @@ public class PerfilService {
 
     public List<Perfil> buscarTodos(){return perfilRepository.findAll();}
 
+    public Perfil salvar(Perfil perfil){return perfilRepository.save(perfil);}
+
+    public void excluir (Perfil perfil){perfilRepository.delete(perfil);}
+
+    public void editar(Perfil perfil){
+        Perfil perfilExistente = perfilRepository.findOne(perfil.getId());
+        if (perfilExistente != null){
+            perfilRepository.save(perfil);
+        }
+    }
+
 }

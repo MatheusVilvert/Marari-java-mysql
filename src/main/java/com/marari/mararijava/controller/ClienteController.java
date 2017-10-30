@@ -13,23 +13,23 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping("clientes/salvar")
+    @PostMapping("cliente/salvar")
     public Cliente cadastrar(@RequestBody Cliente cliente){
         return clienteService.salvar(cliente);
     }
 
-    @PutMapping("clientes/alterar")
+    @PutMapping("cliente/alterar")
     public void editar(@RequestBody Cliente cliente){
         clienteService.editar(cliente);
     }
 
-    @GetMapping("clientes/todos")
+    @GetMapping("cliente/todos")
     public List<Cliente> buscarTodos(){return clienteService.buscarTodos();}
 
-    @GetMapping("clientes/parametro")
+    @GetMapping("cliente/parametro")
     public List<Cliente> buscarPorParametro(@Param("parametro") String parametro){return clienteService.buscarPorParametro(parametro);}
 
-    @DeleteMapping("clientes/{id}")
+    @DeleteMapping("cliente/{id}")
     public void excluir(@PathVariable("id")Integer id){
         Cliente cliente = new Cliente();
         cliente.setId(id);
