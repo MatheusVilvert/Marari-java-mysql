@@ -1,13 +1,7 @@
 package com.marari.mararijava.service;
 
-import com.marari.mararijava.model.Fornecedor;
-import com.marari.mararijava.model.Produto;
-import com.marari.mararijava.model.TipoProduto;
-import com.marari.mararijava.model.Usuario;
-import com.marari.mararijava.repository.FornecedorRepository;
-import com.marari.mararijava.repository.ProdutoRepository;
-import com.marari.mararijava.repository.TipoProdutoRepository;
-import com.marari.mararijava.repository.UsuarioRepository;
+import com.marari.mararijava.model.*;
+import com.marari.mararijava.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +18,38 @@ public class ProdutoService {
     TipoProdutoRepository tipoProdutoRepository;
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    EnderecoRepository enderecoRepository;
 
     public Produto salvar(Produto produto){
+        if (produto.getFornecedor().getEndereco().getId() == null){
+            enderecoRepository.save(produto.getFornecedor().getEndereco());
+        }else {
+            Endereco endereco = enderecoRepository.findOne(produto.getFornecedor().getEndereco().getId());
+            produto.getFornecedor().setEndereco(endereco);
+        }
         //setando fornecedor
         if (produto.getFornecedor().getId() == null){
             fornecedorRepository.save(produto.getFornecedor());
+        }else {
+            Fornecedor fornecedor = fornecedorRepository.findOne(produto.getFornecedor().getId());
+            produto.setFornecedor(fornecedor);
         }
-        Fornecedor fornecedor = fornecedorRepository.findOne(produto.getFornecedor().getId());
-        produto.setFornecedor(fornecedor);
         //setando tipo do produto
         if (produto.getTipoProduto().getId() == null){
             tipoProdutoRepository.save(produto.getTipoProduto());
+        }else {
+            TipoProduto tipoProduto = tipoProdutoRepository.findOne(produto.getTipoProduto().getId());
+            produto.setTipoProduto(tipoProduto);
         }
-        TipoProduto tipoProduto = tipoProdutoRepository.findOne(produto.getTipoProduto().getId());
-        produto.setTipoProduto(tipoProduto);
 
         //setando usuario
         if (produto.getUsuario().getId() == null){
             usuarioRepository.save(produto.getUsuario());
+        }else {
+            Usuario usuario = usuarioRepository.findOne(produto.getUsuario().getId());
+            produto.setUsuario(usuario);
         }
-        Usuario usuario = usuarioRepository.findOne(produto.getUsuario().getId());
-        produto.setUsuario(usuario);
         return produtoRepository.save(produto);
 
     }

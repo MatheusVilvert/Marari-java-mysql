@@ -20,8 +20,11 @@ public class UsuarioService {
         String nomeResgistrado="";
         String nomeNovo = usuario.getNome();
 
-        Perfil  perfilPadrao = perfilRepository.findOne(2);
-        usuario.setPerfil(perfilPadrao);
+        if (usuario.getPerfil() == null) {
+            Perfil perfilPadrao = perfilRepository.findOne(2);
+            usuario.setPerfil(perfilPadrao);
+        }
+
         if (usuario.getId()!= null){
             Usuario usuRegistrado = usuarioRepository.findOne(usuario.getId());
             nomeResgistrado = usuRegistrado.getNome();
@@ -35,12 +38,14 @@ public class UsuarioService {
         }
         //para casdastrar usuario com perfil ja existente passe o id do perfil, caso queira cadastrar usuario e ao mesmo tempo
         //um novo perfil passe a descricao do perfil
-        if (usuario.getPerfil().getId() == null){
-            perfilRepository.save(usuario.getPerfil());
-        }
-        Perfil perfil = perfilRepository.findOne(usuario.getPerfil().getId());
+//        if (usuario.getPerfil().getId() == null){
+//            perfilRepository.save(usuario.getPerfil());
+//        }else {
+            Perfil perfil = perfilRepository.findOne(usuario.getPerfil().getId());
+            usuario.setPerfil(perfil);
+       // }
 
-        usuario.setPerfil(perfil);
+
         return usuarioRepository.save(usuario);
     }
 

@@ -21,9 +21,10 @@ public class ClienteService {
     public Cliente salvar(Cliente cliente){
         if (cliente.getEndereco().getId() == null){
             enderecoRepository.save(cliente.getEndereco());
+        }else {
+            Endereco endereco = enderecoRepository.findOne(cliente.getEndereco().getId());
+            cliente.setEndereco(endereco);
         }
-        Endereco endereco = enderecoRepository.findOne(cliente.getEndereco().getId());
-       cliente.setEndereco(endereco);
         return clienteRepository.save(cliente);
 
     }
