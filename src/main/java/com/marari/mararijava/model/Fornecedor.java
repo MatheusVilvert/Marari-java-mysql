@@ -11,7 +11,7 @@ public class Fornecedor {
     @GeneratedValue
     private Integer id;
     private String nome;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn
     private Endereco endereco;
     private String cpfCnpj;

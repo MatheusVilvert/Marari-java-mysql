@@ -3,10 +3,10 @@ package com.marari.mararijava.controller;
 import com.marari.mararijava.model.Pedido;
 import com.marari.mararijava.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class PedidoController {
@@ -16,5 +16,18 @@ public class PedidoController {
 
     @PostMapping("pedido/salvar")
     public Pedido cadastrar(@RequestBody Pedido pedido){return pedidoService.salvar(pedido);}
+
+    @GetMapping("pedido/todos")
+    public List<Pedido> buscarTodos(){return pedidoService.buscarTodos();}
+
+    @PutMapping("pedido/alterar")
+    public void editar(@RequestBody Pedido pedido){pedidoService.editar(pedido);}
+
+    @DeleteMapping("pedido/{id}")
+    public void excluir(@PathVariable("id")Integer id){
+        Pedido pedido = new Pedido();
+        pedido.setId(id);
+        pedidoService.excluir(pedido);
+    }
 
 }
